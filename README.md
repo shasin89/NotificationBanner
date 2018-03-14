@@ -12,7 +12,7 @@ Add the library to your **build.gradle**:
 ```gradle
 
 dependencies {
-      compile 'compile 'com.github.shasin89:PopUpBanner:0.1.1'
+      compile 'compile 'com.github.shasin89:NotificationBanner:-SNAPSHOT'
     }
 ```
 This library is distributed via jitpack. Add following in your gradle if doesn't exist:
