@@ -12,7 +12,7 @@ Add the library to your **build.gradle**:
 ```gradle
 
 dependencies {
-      compile 'compile 'com.github.shasin89:PopUpBanner:0.1'
+      compile 'compile 'com.github.shasin89:PopUpBanner:0.1.1'
     }
 ```
 This library is distributed via jitpack. Add following in your gradle if doesn't exist:
@@ -35,9 +35,9 @@ In onCreate() of your activity, create a new Banner object:
 
 ```
 rootview = findViewById(android.R.id.content);
-banner = new Banner(rootview,getBaseContext(),Banner.BOTTOM);
+banner = new Banner(rootview,getBaseContext());
 ```
-The constructor requires view, context, and gravity as parameters
+The constructor requires view, context
 
 Once a banner object is instantiated, you must set your custom banner layout, in order to instantiate new banner view:
 
@@ -69,3 +69,14 @@ textView.setOnClickListener(new View.OnClickListener() {
             }
         });
 ```
+
+Finally, invoke pop up window:
+```
+banner.setPopupWindow();
+```
+
+By default the gravity of the banner is set to top of the rootview. You can change the location of the banner to top,center and bottom :
+```
+banner.setGravity(Banner.TOP);
+```
+
