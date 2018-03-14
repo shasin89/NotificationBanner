@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         //
         rootview = findViewById(android.R.id.content);
 
-        banner = new Banner(rootview,getBaseContext(),Banner.TOP);
+        banner = new Banner(rootview,getBaseContext());
 
     }
 
@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         relativeLayout = banner.getBannerView().findViewById(R.id.rlCancel);
         textView.setText("This is text for the banner");
         banner.setFocusable(true);
+        banner.setGravity(Banner.TOP);
         banner.setPopupWindow();
         initlistener();
     }

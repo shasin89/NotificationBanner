@@ -29,7 +29,7 @@ public class Banner {
     public static int CENTER = Gravity.CENTER;
     public static int BOTTOM = Gravity.BOTTOM;
 
-    private int gravity;
+    private int gravity = TOP;
 
     private static Banner instance;
 
@@ -38,12 +38,26 @@ public class Banner {
     }
 
 
-    public  Banner(View view, final Context context, int gravity) {
+    public  Banner(View view, final Context context) {
         // create the popup window
         this.mContext = context;
         this.rootView = view;
+    }
+
+
+    /**
+     * Set the location of the banner to TOP,CENTER,BOTTOM
+     * By defauly gravity is set to TOP
+     * @param gravity
+     *
+     */
+    public void setGravity(int gravity) {
         this.gravity = gravity;
-//        setPopupWindow(view);
+    }
+
+
+    public int getGravity() {
+        return gravity;
     }
 
     /**
