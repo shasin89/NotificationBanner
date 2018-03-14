@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         textView.setText("This is text for the banner");
         banner.setFocusable(true);
         banner.setGravity(Banner.TOP);
-        banner.setPopupWindow();
         initlistener();
+        banner.setPopupWindow();
     }
 
     public void initlistener(){

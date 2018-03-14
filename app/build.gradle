@@ -18,6 +18,8 @@ android {
     }
 }
 
+
+
 allprojects {
     repositories {
         maven { url 'https://jitpack.io' }
@@ -32,6 +34,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
-    compile 'com.github.shasin89:PopUpBanner:0.1'
+    compile 'com.github.shasin89:PopUpBanner:0.1.3'
 //    compile project(":popupbanner")
 }
