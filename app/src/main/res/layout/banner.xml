@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="#12232E"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp">
+
+        <ImageView
+            android:id="@+id/status_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:foregroundGravity="top"
+            android:background="@mipmap/ic_launcher"
+            />
+
+        <LinearLayout
+            android:id="@+id/textmsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/status_icon"
+            android:layout_toEndOf="@+id/status_icon"
+            android:layout_toLeftOf="@+id/rlCancel"
+            android:layout_toStartOf="@+id/rlCancel"
+            >
+
+            <TextView
+                android:id="@+id/status_server"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Label"
+                android:textColor="#ffffff"
+                android:textSize="14dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/status_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="#ffffff"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/status_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="12dp"
+                android:textColor="#345fff"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:gravity=""
+            >
+
+            <ImageView
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/ic_menu_close_clear_cancel"
+                android:textColor="#ffffff"
+                android:textSize="30dp"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
