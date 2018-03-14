@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         //
         rootview = findViewById(android.R.id.content);
 
-        banner = new Banner(rootview,getBaseContext(),Banner.BOTTOM);
+        banner = new Banner(rootview,getBaseContext(),Banner.TOP);
 
     }
 
