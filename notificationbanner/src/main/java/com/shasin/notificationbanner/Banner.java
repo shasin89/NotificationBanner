@@ -133,26 +133,21 @@ public class Banner {
      *
      */
     public void setPopupWindow(){
-        final android.os.Handler handler = new android.os.Handler();
 
         final int width = LinearLayout.LayoutParams.MATCH_PARENT;
         final int height = LinearLayout.LayoutParams.WRAP_CONTENT;
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // delayed to 300ms to
-                popupWindow = new PopupWindow(popupView, width, height, focusable);
+        popupWindow = new PopupWindow(popupView, width, height, focusable);
 
+        rootView.post(new Runnable() {
+            public void run() {
                 if(belowView){
                     popupWindow.showAsDropDown(rootView);
                 }else{
                     popupWindow.showAtLocation(rootView, gravity, 0, 0);
                 }
-
             }
-        }, delay);
-
+        });
     }
 
 }
