@@ -1,4 +1,4 @@
-package com.example.notificationbanner;
+package com.shasin.notificationbanner;
 
 import org.junit.Test;
 

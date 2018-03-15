@@ -1,4 +1,4 @@
-package com.example.notificationbanner;
+package com.shasin.notificationbanner;
 
 import android.content.Context;
 import android.view.Gravity;
@@ -28,6 +28,7 @@ public class Banner {
     public static int BOTTOM = Gravity.BOTTOM;
 
     private int gravity = TOP;
+    private int delay = 1500;
 
     private static Banner instance;
 
@@ -42,6 +43,20 @@ public class Banner {
         this.rootView = view;
     }
 
+    public int getDelay() {
+        return delay;
+    }
+
+
+    /**
+     * Set this delay for showing notification banner
+     * By defauly delay is 1500
+     * @param delay
+     *
+     */
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
 
     /**
      * Set the location of the banner to TOP,CENTER,BOTTOM
@@ -136,23 +151,8 @@ public class Banner {
                 }
 
             }
-        }, 500);
-
-
-
-
-        // show the popup window
-
-//        buttonCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                popupWindow.dismiss();
-//                Log.d("Cancel", "Clicked");
-//            }
-//        });
+        }, delay);
 
     }
-
-
 
 }

@@ -1,4 +1,4 @@
-package com.example.notificationbanner;
+package com.shasin.notificationbanner;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -8,7 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.notificationbanner.Banner;
+import com.shasin.notificationbanner.Banner;
 
 public class MainActivity extends AppCompatActivity {
 
