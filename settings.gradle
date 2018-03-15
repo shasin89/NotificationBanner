@@ -1,2 +1,2 @@
 include ':app'
-include ':popupbanner'
+include ':notificationbanner'

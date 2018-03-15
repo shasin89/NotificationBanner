@@ -37,5 +37,5 @@ dependencies {
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
 //    compile 'com.github.shasin89:NotificationBanner:1.0.3'
 //    compile 'com.github.shasin89:PopUpBanner:0.1'
-    compile project(":popupbanner")
+    compile project(':notificationbanner')
 }
