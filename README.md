@@ -1,6 +1,6 @@
 # PopUp Notification Banner
 
-A pop up notification banner for in app local notifcation
+A pop up notification banner for in app local notification
 
 ![demo](/screenshot.png)
 
