@@ -4,6 +4,8 @@ A pop up notification banner for in app local notifcation
 
 ![demo](/screenshot.png)
 
+[![](https://jitpack.io/v/shasin89/NotificationBanner.svg)](https://jitpack.io/#shasin89/NotificationBanner)
+
 
 ## Installation
 
