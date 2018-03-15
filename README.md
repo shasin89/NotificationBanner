@@ -14,7 +14,7 @@ Add the library to your **build.gradle**:
 ```gradle
 
 dependencies {
-      compile 'com.github.shasin89:NotificationBanner:1.0.3'
+      compile 'com.github.shasin89:NotificationBanner:1.0.4'
     }
 ```
 This library is distributed via jitpack. Add following in your gradle if doesn't exist:
