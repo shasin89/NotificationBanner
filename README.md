@@ -39,7 +39,7 @@ In onCreate() of your activity, create a new Banner object:
 View rootview = findViewById(android.R.id.content);
 Banner banner = new Banner(rootview,getBaseContext());
 ```
-The constructor requires view, context
+The constructor requires view and context as parameters.
 
 Once a banner object is instantiated, you must set your custom banner layout, in order to instantiate new banner view:
 
