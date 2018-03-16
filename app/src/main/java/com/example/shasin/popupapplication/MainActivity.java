@@ -1,9 +1,11 @@
 package com.example.shasin.popupapplication;
 
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     RelativeLayout relativeLayout;
     View rootview;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,19 +27,17 @@ public class MainActivity extends AppCompatActivity {
 
         //
         rootview = findViewById(android.R.id.content);
-
-        banner = new Banner(rootview,getBaseContext());
-
+        button = findViewById(R.id.button);
+        setBanner();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        setBanner();
-
     }
 
     public void setBanner() {
+        banner = new Banner(rootview,getBaseContext());
         banner.setLayout(R.layout.banner);
         textView = banner.getBannerView().findViewById(R.id.status_text);
         relativeLayout = banner.getBannerView().findViewById(R.id.rlCancel);
@@ -44,10 +45,16 @@ public class MainActivity extends AppCompatActivity {
         banner.setFocusable(true);
         banner.setGravity(Banner.TOP);
         initlistener();
-        banner.setPopupWindow();
     }
 
     public void initlistener(){
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callBanner();
+            }
+        });
+
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,5 +70,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //example to invoke notification banner
+    private void callBanner(){
+        banner.setPopupWindow();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }
