@@ -2,7 +2,7 @@
 
 A pop up notification banner for in app local notification
 
-![demo](/notification_banner.gif)
+![demo](/demo.gif)
 
 [![](https://jitpack.io/v/shasin89/NotificationBanner.svg)](https://jitpack.io/#shasin89/NotificationBanner)
 
@@ -71,14 +71,19 @@ textView.setOnClickListener(new View.OnClickListener() {
             }
         });
 ```
+By default the gravity of the banner is set to top of the rootview. You can change the location of the banner to top,center and bottom :
+```java
+banner.setGravity(Banner.TOP);
+```
+The library allow to set custom animation for the banner. You can set your own animation style as below:
+```java
+banner.setAnimationstyle(R.style.PopupWindowAnimation);
+```
 
 Finally, invoke pop up window:
 ```java
 banner.setPopupWindow();
 ```
 
-By default the gravity of the banner is set to top of the rootview. You can change the location of the banner to top,center and bottom :
-```
-banner.setGravity(Banner.TOP);
-```
+
 
