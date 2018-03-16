@@ -2,7 +2,7 @@
 
 A pop up notification banner for in app local notification
 
-![demo](/screenshot.png)
+![demo](/notification_banner.gif)
 
 [![](https://jitpack.io/v/shasin89/NotificationBanner.svg)](https://jitpack.io/#shasin89/NotificationBanner)
 
@@ -35,27 +35,27 @@ The minimum API level supported by this library is **API 14 (ICE_CREAM_SANDWICH)
 
 In onCreate() of your activity, create a new Banner object:
 
-```
-rootview = findViewById(android.R.id.content);
-banner = new Banner(rootview,getBaseContext());
+```java
+View rootview = findViewById(android.R.id.content);
+Banner banner = new Banner(rootview,getBaseContext());
 ```
 The constructor requires view, context
 
 Once a banner object is instantiated, you must set your custom banner layout, in order to instantiate new banner view:
 
-```
+```java
 banner.setLayout(R.layout.banner);
 ```
 
 If your banner has views that need to be set on runtime, instantiate your view objects as below:
-```
+```java
 textView = banner.getBannerView().findViewById(R.id.status_text);
 rlCancel = banner.getBannerView().findViewById(R.id.rlCancel);
 textView.setText("This is text for the banner");
 ```
 
 To listen to click events, you can implement the following code:
-```
+```java
 textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +73,7 @@ textView.setOnClickListener(new View.OnClickListener() {
 ```
 
 Finally, invoke pop up window:
-```
+```java
 banner.setPopupWindow();
 ```
 
