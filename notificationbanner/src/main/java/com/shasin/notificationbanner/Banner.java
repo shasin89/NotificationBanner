@@ -1,6 +1,7 @@
 package com.shasin.notificationbanner;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,10 @@ public class Banner {
 
     private int gravity = TOP;
     private int delay = 1500;
+
+    private Integer animationStyle;
+
+    private String TAG = getClass().getName();
 
     private static Banner instance;
 
@@ -121,7 +126,12 @@ public class Banner {
     }
 
     public void dismissBanner(){
-        popupWindow.dismiss();
+        try{
+            popupWindow.dismiss();
+        }catch (Exception e){
+            Log.e(TAG,e.toString());
+        }
+
     }
 
     /**
@@ -139,6 +149,10 @@ public class Banner {
 
         popupWindow = new PopupWindow(popupView, width, height, focusable);
 
+        if(animationStyle != null){
+            popupWindow.setAnimationStyle(animationStyle);
+        }
+
         rootView.post(new Runnable() {
             public void run() {
                 if(belowView){
@@ -150,4 +164,7 @@ public class Banner {
         });
     }
 
+    public void setAnimationstyle(int style){
+        animationStyle = style;
+    }
 }
