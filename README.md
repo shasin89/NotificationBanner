@@ -2,6 +2,9 @@
 
 A pop up notification banner for in app local notification. Easy to use with default layouts for success, info, warning, and error banners. The library allow to customize the layout with your own design and click events.
 
+**Blog:**
+https://medium.com/@shasindranpoonudurai/the-effortless-in-app-notification-banner-library-for-your-android-app-9a9eb3f2bd5c
+
 **Top:**
 
 ![demo](/art/demoTop.gif)
