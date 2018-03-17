@@ -1,2 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shasin.notificationbanner" />
+    package="com.shasin.notificationbanner">
+    <application android:allowBackup="true">
+
+    </application>
+</manifest>

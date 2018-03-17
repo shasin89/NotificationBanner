@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="#f45e41"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="14dp">
+
+        <ImageView
+            android:id="@+id/status_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:foregroundGravity="top"
+            android:background="@drawable/ic_stat_error"
+            />
+
+        <LinearLayout
+            android:id="@+id/textmsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/status_icon"
+            android:layout_toEndOf="@+id/status_icon"
+            android:layout_toLeftOf="@+id/rlCancel"
+            android:layout_toStartOf="@+id/rlCancel"
+            >
+
+            <TextView
+                android:id="@+id/error_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your error message goes here"
+                android:textStyle="bold"
+                android:textColor="#ffffff"
+                android:textSize="14dp"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlCancel"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            >
+
+            <ImageView
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_stat_close"
+                />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

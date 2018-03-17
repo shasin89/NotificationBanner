@@ -1,4 +1,4 @@
-package com.example.shasin.popupapplication;
+package com.example.shasin.notificationbanner;
 
 import org.junit.Test;
 
