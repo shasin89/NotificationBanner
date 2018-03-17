@@ -7,7 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+
+import java.util.logging.Handler;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
@@ -20,18 +24,30 @@ public class Banner {
     private Context mContext;
     private View popupView;
     private View rootView;
-    private boolean belowView;
     private  boolean focusable;
     private PopupWindow popupWindow;
 
     public static int TOP = Gravity.TOP;
-    public static int CENTER = Gravity.CENTER;
     public static int BOTTOM = Gravity.BOTTOM;
 
+    public static int SUCCESS = 1;
+    public static int INFO = 2;
+    public static int WARNING = 3;
+    public static int ERROR = 4;
+    public static int CUSTOM = 5;
+
+    private boolean showBanner = false;
     private int gravity = TOP;
     private int delay = 1500;
+    private int duration = 0;
+    private int bannerType = 0;
+
+    private TextView textMessage;
+    private RelativeLayout rlCancel;
 
     private Integer animationStyle;
+
+    private int layout;
 
     private String TAG = getClass().getName();
 
@@ -41,6 +57,10 @@ public class Banner {
         void onViewClickListener(View view);
     }
 
+    //Constructors
+    public Banner(){
+
+    }
 
     public  Banner(View view, final Context context) {
         // create the popup window
@@ -48,10 +68,80 @@ public class Banner {
         this.rootView = view;
     }
 
+    public static Banner make(View view,Context context, int bannerType, String message, int position) {
+
+        if(instance == null){
+            instance = new Banner();
+        }else {
+            if(instance.showBanner){
+                instance.dismissBanner();
+            }
+        }
+            instance.rootView = view;
+            instance.mContext = context;
+            instance.setBannerLayout(bannerType);
+            instance.setLayout(instance.layout);
+            instance.setBannerText(message);
+            instance.setGravity(position);
+            instance.setCancelButton();
+            instance.setAnimationstyle();
+
+        return instance;
+    }
+
+    public static Banner make(View view,Context context, int bannerType, String message, int position, int duration) {
+        if(instance == null){
+            instance = new Banner();
+        }else {
+            if(instance.showBanner){
+                instance.dismissBanner();
+            }
+        }
+        instance.rootView = view;
+        instance.mContext = context;
+        instance.setBannerLayout(bannerType);
+        instance.setLayout(instance.layout);
+        instance.setBannerText(message);
+        instance.setDuration(duration);
+        instance.setGravity(position);
+        instance.setCancelButton();
+        instance.setAnimationstyle();
+
+        return instance;
+    }
+
+    /**
+     * this constructor is used for customlayout
+     *
+     */
+    public static Banner make(View view,Context context, String message, int position, int Customlayout) {
+
+        if(instance == null){
+            instance = new Banner();
+        }else {
+            if(instance.showBanner){
+                instance.dismissBanner();
+            }
+        }
+        instance.rootView = view;
+        instance.mContext = context;
+        instance.setLayout(Customlayout);
+        instance.setGravity(position);
+
+        return instance;
+    }
+
+
+    public static Banner getInstance(){
+        if(instance == null){
+            instance = new Banner();
+        }
+        return instance;
+    }
+
     public int getDelay() {
         return delay;
     }
-
 
     /**
      * Set this delay for showing notification banner
@@ -61,6 +151,20 @@ public class Banner {
      */
     public void setDelay(int delay) {
         this.delay = delay;
+    }
+
+    /**
+     * Set this to auto dismiss  notification banner
+     * By defauly duration is 0
+     * @param duration
+     *
+     */
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 
     /**
@@ -93,17 +197,68 @@ public class Banner {
         return focusable;
     }
 
-    /**
-     * Set the banner below or as dropdown of rootview
-     * @param belowView
-     *
-     */
-    public void setBelowView(boolean belowView) {
-        this.belowView = belowView;
+
+    private void setBannerLayout(int bannerType){
+
+        int result = 0;
+
+        switch (bannerType){
+            case 1:
+                result = R.layout.success;
+                break;
+            case 2:
+                result = R.layout.info;
+                break;
+            case 3:
+                result = R.layout.warning;
+                break;
+            case 4:
+                result = R.layout.error;
+                break;
+        }
+        layout =  result;
     }
 
-    public boolean isBelowView() {
-        return belowView;
+
+    /**
+     * This method set textview for the default banners
+     * @param text
+     *
+     */
+    private void setBannerText(String text){
+
+        switch (bannerType){
+            case 1:
+                textMessage = popupView.findViewById(R.id.success_message);
+                textMessage.setText(text);
+                break;
+            case 2:
+                textMessage = popupView.findViewById(R.id.info_message);
+                textMessage.setText(text);
+                break;
+            case 3:
+                textMessage = popupView.findViewById(R.id.warning_message);
+                textMessage.setText(text);
+                break;
+            case 4:
+                textMessage = popupView.findViewById(R.id.error_message);
+                textMessage.setText(text);
+                break;
+        }
+    }
+
+
+    private void setCancelButton(){
+        if(duration > 0){
+            rlCancel.setVisibility(View.INVISIBLE);
+        }else {
+            rlCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    popupWindow.dismiss();
+                }
+            });
+        }
     }
 
     /**
@@ -115,6 +270,7 @@ public class Banner {
         LayoutInflater inflater = (LayoutInflater)
                 mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
         popupView = inflater.inflate(layout, null);
+        rlCancel = popupView.findViewById(R.id.rlCancel);
     }
 
     /**
@@ -128,21 +284,20 @@ public class Banner {
     public void dismissBanner(){
         try{
             popupWindow.dismiss();
+            showBanner = false;
         }catch (Exception e){
             Log.e(TAG,e.toString());
         }
-
     }
-
     /**
      * This method create a new popup window
-     * Implemented runnable to delay in order to avoid bad window token exception
      * This method must be called after setLayout
      * focusable default value is false
      *
-     *
      */
-    public void setPopupWindow(){
+    public void show(){
+
+        showBanner = true;
 
         final int width = LinearLayout.LayoutParams.MATCH_PARENT;
         final int height = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -155,16 +310,41 @@ public class Banner {
 
         rootView.post(new Runnable() {
             public void run() {
-                if(belowView){
-                    popupWindow.showAsDropDown(rootView);
-                }else{
                     popupWindow.showAtLocation(rootView, gravity, 0, 0);
-                }
             }
         });
+
+        autoDismiss(duration);
     }
 
-    public void setAnimationstyle(int style){
-        animationStyle = style;
+    private void setAnimationstyle(){
+        if(gravity == TOP)
+            animationStyle = R.style.topAnimation;
+        else if (gravity == BOTTOM)
+            animationStyle = R.style.bottomAnimation;
+    }
+
+    public void setCustomAnimationStyle(int customAnimationStyle){
+        animationStyle =customAnimationStyle;
+    }
+
+
+    /**
+     * This method auto dismiss banner
+     *
+     *@param duration
+     *
+     */
+    private void autoDismiss(int duration){
+        if(duration > 0){
+            android.os.Handler handler = new android.os.Handler();
+
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dismissBanner();
+                }
+            },duration);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.shasin.popupapplication;
+package com.example.shasin.notificationbanner;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
