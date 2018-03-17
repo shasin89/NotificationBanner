@@ -64,22 +64,23 @@
 
         <RelativeLayout
             android:id="@+id/rlCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:gravity=""
+            android:gravity="top"
             >
 
             <ImageView
                 android:id="@+id/tvCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/ic_menu_close_clear_cancel"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/ic_stat_close"
                 android:textColor="#ffffff"
-                android:textSize="30dp"/>
+                android:layout_centerInParent="true"
+                />
         </RelativeLayout>
 
     </RelativeLayout>
