@@ -2,15 +2,15 @@
 
 A pop up notification banner for in app local notification. Easy to use with default layouts for success, info, warning, and error banners. The library allow to customize the layout with your own design and click events.
 
-Top:
+**Top:**
 
 ![demo](/art/demoTop.gif)
 
-Bottom:
+**Bottom:**
 
 ![demo](/art/demoBottom.gif) 
 
-Auto dismiss and on click listener:
+**Auto dismiss and onClick listener:**
 
 ![demo](/art/demoAuto.gif)
 
@@ -51,21 +51,21 @@ View rootview = findViewById(android.R.id.content);
 
 With the latest release of v1.1.0, you can now call the banner with one line of code:
 
-Option 1: Choose default layouts
+**Option 1: Choose default layouts**
 ```java
 Banner.make(View view,Context context, int bannerType, String message, int position);
 ```
 
-Option 2: Choose default layouts with auto dismiss after the given duration
+**Option 2: Choose default layouts with auto dismiss after the given duration**
 ```java
 Banner.make(View view,Context context, int bannerType, String message, int position, int duration);
 ```
-Option 3: With custom layout:
+**Option 3: With custom layout:**
 ```java
 Banner.make(View view,Context context, int position, int Customlayout);
 ```
 
-Example:
+**Example:**
 ```java
 Banner.make(rootview,getBaseContext(),Banner.SUCCESS,"This is a successful message",Banner.TOP).show();
 ```
@@ -117,6 +117,7 @@ Finally, invoke show method:
 ```java
  Banner.getInstance().show();
 ```
+
 ## Contribution
 Pull requests for new features, bug fixes, and suggestions are welcome!
 
