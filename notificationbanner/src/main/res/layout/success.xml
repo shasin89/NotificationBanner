@@ -36,6 +36,15 @@
             >
 
             <TextView
+                android:id="@+id/labelSuccess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Success"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="16dp" />
+
+            <TextView
                 android:id="@+id/success_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
