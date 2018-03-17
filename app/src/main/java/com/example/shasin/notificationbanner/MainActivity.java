@@ -17,19 +17,27 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout relativeLayout;
     View rootview;
     Button buttonSuccess,buttonInfo,buttonWarning,buttonError,buttonCustom;
+    Button buttonSuccessBottom,buttonInfoBottom,buttonWarningBottom,buttonErrorBottom,buttonCustomBottom;
+    Button buttonErrorAuto,buttonCustomAuto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //
         rootview = findViewById(android.R.id.content);
         buttonSuccess = findViewById(R.id.buttonSuccess);
         buttonInfo = findViewById(R.id.buttonInfo);
         buttonWarning = findViewById(R.id.buttonWarning);
         buttonError = findViewById(R.id.buttonError);
         buttonCustom = findViewById(R.id.buttonCustom);
+        buttonSuccessBottom = findViewById(R.id.buttonSuccessBottom);
+        buttonInfoBottom = findViewById(R.id.buttonInfoBottom);
+        buttonWarningBottom = findViewById(R.id.buttonWarningBottom);
+        buttonErrorBottom = findViewById(R.id.buttonErrorBottom);
+        buttonCustomBottom = findViewById(R.id.buttonCustomBottom);
+        buttonErrorAuto= findViewById(R.id.buttonErrorAuto);
+        buttonCustomAuto = findViewById(R.id.buttonCustomAuto);
         initlistener();
     }
 
@@ -50,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         buttonInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.INFO,"This is a info message",Banner.BOTTOM).show();
+                Banner.make(rootview,getBaseContext(),Banner.INFO,"This is an info message",Banner.TOP).show();
             }
         });
 
@@ -64,27 +72,99 @@ public class MainActivity extends AppCompatActivity {
         buttonError.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.ERROR,"This is a error message",Banner.BOTTOM).show();
+                Banner.make(rootview,getBaseContext(),Banner.ERROR,"This is an error message",Banner.TOP).show();
             }
         });
 
         buttonCustom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callBanner();
+                callBannerTop();
+            }
+        });
+
+        buttonSuccessBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Banner.make(rootview,getBaseContext(),Banner.SUCCESS,"This is a successful message",Banner.BOTTOM).show();
+            }
+        });
+
+        buttonInfoBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Banner.make(rootview,getBaseContext(),Banner.INFO,"This is an info message",Banner.BOTTOM).show();
+            }
+        });
+
+        buttonWarningBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Banner.make(rootview,getBaseContext(),Banner.WARNING,"This is a warning message",Banner.BOTTOM).show();
+            }
+        });
+
+        buttonErrorBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Banner.make(rootview,getBaseContext(),Banner.ERROR,"This is an error message",Banner.BOTTOM).show();
+            }
+        });
+
+        buttonCustomBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callBannerBottom();
+            }
+        });
+
+        buttonErrorAuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Banner.make(rootview,getBaseContext(),Banner.ERROR,"This is an error message",Banner.BOTTOM,2000).show();
+            }
+        });
+
+        buttonCustomAuto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                callBannerAuto();
             }
         });
 
     }
 
     //example to invoke notification banner
-    private void callBanner(){
-        Banner.make(rootview,getBaseContext(),"This is a error message",Banner.TOP,R.layout.banner);
+    private void callBannerTop(){
+        Banner.make(rootview,getBaseContext(),Banner.TOP,R.layout.banner);
         textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
         relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
         textView.setText("This is text for the banner");
         bannerClickListener();
-        Banner.getInstance().setCustomAnimationStyle(R.style.NotificationAnimation);
+        Banner.getInstance().setCustomAnimationStyle(R.style.NotificationAnimationTop);
+        Banner.getInstance().show();
+    }
+
+    //example to invoke notification banner
+    private void callBannerBottom(){
+        Banner.make(rootview,getBaseContext(),Banner.BOTTOM,R.layout.banner);
+        textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
+        relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
+        textView.setText("This is text for the banner");
+        bannerClickListener();
+        Banner.getInstance().setCustomAnimationStyle(R.style.NotificationAnimationBottom);
+        Banner.getInstance().show();
+    }
+
+    //example to invoke notification banner
+    private void callBannerAuto(){
+        Banner.make(rootview,getBaseContext(),Banner.TOP,R.layout.banner);
+        textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
+        relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
+        textView.setText("This is text for the banner");
+        bannerClickListener();
+        Banner.getInstance().setDuration(2000);
+        Banner.getInstance().setCustomAnimationStyle(R.style.NotificationAnimationTop);
         Banner.getInstance().show();
     }
 
@@ -104,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
         relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG","Clicked");
                 Banner.getInstance().dismissBanner();
             }
         });

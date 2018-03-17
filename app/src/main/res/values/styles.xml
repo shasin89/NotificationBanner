@@ -8,9 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="NotificationAnimation" parent="android:Animation">
+    <style name="NotificationAnimationTop" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/top_enter</item>
         <item name="android:windowExitAnimation">@anim/top_exit</item>
+    </style>
+
+    <style name="NotificationAnimationBottom" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/bottom_exit</item>
     </style>
 
 </resources>

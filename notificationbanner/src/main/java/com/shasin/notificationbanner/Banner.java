@@ -40,7 +40,7 @@ public class Banner {
     private int gravity = TOP;
     private int delay = 1500;
     private int duration = 0;
-    private int bannerType = 0;
+    private int bannerType;
 
     private TextView textMessage;
     private RelativeLayout rlCancel;
@@ -82,6 +82,7 @@ public class Banner {
             instance.setBannerLayout(bannerType);
             instance.setLayout(instance.layout);
             instance.setBannerText(message);
+            instance.setDuration(0);
             instance.setGravity(position);
             instance.setCancelButton();
             instance.setAnimationstyle();
@@ -89,6 +90,10 @@ public class Banner {
         return instance;
     }
 
+    /**
+     * This constructor is used for autodismiss
+     *
+     */
     public static Banner make(View view,Context context, int bannerType, String message, int position, int duration) {
         if(instance == null){
             instance = new Banner();
@@ -114,7 +119,7 @@ public class Banner {
      * this constructor is used for customlayout
      *
      */
-    public static Banner make(View view,Context context, String message, int position, int Customlayout) {
+    public static Banner make(View view,Context context, int position, int Customlayout) {
 
         if(instance == null){
             instance = new Banner();
@@ -126,6 +131,7 @@ public class Banner {
         instance.rootView = view;
         instance.mContext = context;
         instance.setLayout(Customlayout);
+        instance.setDuration(0);
         instance.setGravity(position);
 
         return instance;
@@ -198,10 +204,10 @@ public class Banner {
     }
 
 
-    private void setBannerLayout(int bannerType){
+    private void setBannerLayout(int type){
 
+        bannerType = type;
         int result = 0;
-
         switch (bannerType){
             case 1:
                 result = R.layout.success;
@@ -226,7 +232,6 @@ public class Banner {
      *
      */
     private void setBannerText(String text){
-
         switch (bannerType){
             case 1:
                 textMessage = popupView.findViewById(R.id.success_message);
@@ -247,7 +252,11 @@ public class Banner {
         }
     }
 
-
+    /**
+     * Hide close icon if duration is already set
+     *
+     *
+     */
     private void setCancelButton(){
         if(duration > 0){
             rlCancel.setVisibility(View.INVISIBLE);
@@ -338,7 +347,6 @@ public class Banner {
     private void autoDismiss(int duration){
         if(duration > 0){
             android.os.Handler handler = new android.os.Handler();
-
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {

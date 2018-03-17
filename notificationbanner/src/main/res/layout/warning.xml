@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:background="#f4a941"
+    android:background="@color/colorWarning"
     >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="14dp">
+        android:layout_margin="13dp">
 
         <ImageView
             android:id="@+id/status_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:foregroundGravity="top"
@@ -39,8 +39,7 @@
                 android:id="@+id/warning_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your warning message goes here"
-                android:textStyle="bold"
+                android:text=""
                 android:textColor="#ffffff"
                 android:textSize="14dp"
                 />
@@ -59,8 +58,8 @@
 
             <ImageView
                 android:id="@+id/tvCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
                 android:background="@drawable/ic_stat_close"
                 />
         </RelativeLayout>
