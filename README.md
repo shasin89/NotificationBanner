@@ -1,8 +1,18 @@
-# PopUp Notification Banner
+# Notification Banner for Android
 
-A pop up notification banner for in app local notification
+A pop up notification banner for in app local notification. Easy to use with default layouts for success, info, warning, and error banners. The library allow to customize the layout with your own design and click events.
 
-![demo](/demo.gif)
+Top:
+
+![demo](/art/demoTop.gif)
+
+Bottom:
+
+![demo](/art/demoBottom.gif) 
+
+Auto dismiss and on click listener:
+
+![demo](/art/demoAuto.gif)
 
 [![](https://jitpack.io/v/shasin89/NotificationBanner.svg)](https://jitpack.io/#shasin89/NotificationBanner)
 
@@ -33,56 +43,79 @@ The minimum API level supported by this library is **API 14 (ICE_CREAM_SANDWICH)
 
 ## Usage
 
-In onCreate() of your activity, create a new Banner object:
+In onCreate() of your activity, create a root view object for the banner:
 
 ```java
 View rootview = findViewById(android.R.id.content);
-Banner banner = new Banner(rootview,getBaseContext());
-```
-The constructor requires view and context as parameters.
-
-Once a banner object is instantiated, you must set your custom banner layout, in order to instantiate new banner view:
-
-```java
-banner.setLayout(R.layout.banner);
 ```
 
-If your banner has views that need to be set on runtime, instantiate your view objects as below:
+With the latest release of v1.1.0, you can now call the banner with one line of code:
+
+Option 1: Choose default layouts
 ```java
-textView = banner.getBannerView().findViewById(R.id.status_text);
-rlCancel = banner.getBannerView().findViewById(R.id.rlCancel);
+Banner.make(View view,Context context, int bannerType, String message, int position);
+```
+
+Option 2: Choose default layouts with auto dismiss after the given duration
+```java
+Banner.make(View view,Context context, int bannerType, String message, int position, int duration);
+```
+Option 3: With custom layout:
+```java
+Banner.make(View view,Context context, int position, int Customlayout);
+```
+
+Example:
+```java
+Banner.make(rootview,getBaseContext(),Banner.SUCCESS,"This is a successful message",Banner.TOP).show();
+```
+
+```java
+Banner.make(rootview,getBaseContext(),Banner.ERROR,"This is an error message",Banner.BOTTOM,2000).show();
+```
+
+For custom layout, pass your layout as shown below:
+```java
+Banner.make(rootview,getBaseContext(),Banner.TOP,R.layout.banner);
+```
+
+If your custom banner has views that need to be set on runtime, instantiate your view objects as below:
+```java
+textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
+relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
 textView.setText("This is text for the banner");
 ```
 
 To listen to click events, you can implement the following code:
 ```java
-textView.setOnClickListener(new View.OnClickListener() {
+ textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getBaseContext(),"Toast", Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),"Banner has been clicked", Toast.LENGTH_LONG).show();
             }
         });
 
-        rlcancel.setOnClickListener(new View.OnClickListener() {
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG","Clicked");
-                banner.dismissBanner();
+                Banner.getInstance().dismissBanner();
             }
         });
 ```
-By default the gravity of the banner is set to top of the rootview. You can change the location of the banner to top,center and bottom :
-```java
-banner.setGravity(Banner.TOP);
-```
+
 The library allow to set custom animation for the banner. You can set your own animation style as below:
 ```java
-banner.setAnimationstyle(R.style.PopupWindowAnimation);
+Banner.getInstance().setCustomAnimationStyle(R.style.NotificationAnimationBottom);
 ```
 
-Finally, invoke pop up window:
+If you want to auto dismiss your custom banner, set the duration as below:
 ```java
-banner.setPopupWindow();
+Banner.getInstance().setDuration(2000);
+```
+
+Finally, invoke show method:
+```java
+ Banner.getInstance().show();
 ```
 ## Contribution
 Pull requests for new features, bug fixes, and suggestions are welcome!
