@@ -25,6 +25,7 @@ public class Banner {
     private View popupView;
     private View rootView;
     private  boolean focusable;
+    private  boolean asDropDown;
     private PopupWindow popupWindow;
 
     public static int TOP = Gravity.TOP;
@@ -136,6 +137,31 @@ public class Banner {
 
         return instance;
     }
+
+    /**
+     * this constructor is used for customlayout and show notification as dropdown of a view
+     *
+     */
+    public static Banner make(View view,Context context, int position, int Customlayout,boolean asDropDown) {
+
+        if(instance == null){
+            instance = new Banner();
+        }else {
+            if(instance.showBanner){
+                instance.dismissBanner();
+            }
+        }
+        instance.rootView = view;
+        instance.mContext = context;
+        instance.setLayout(Customlayout);
+        instance.setDuration(0);
+        instance.setGravity(position);
+        instance.asDropDown = asDropDown;
+
+        return instance;
+    }
+
+
 
 
     public static Banner getInstance(){
@@ -252,6 +278,14 @@ public class Banner {
         }
     }
 
+    public void setAsDropDown(boolean asDropDown) {
+        this.asDropDown = asDropDown;
+    }
+
+    public boolean isAsDropDown() {
+        return asDropDown;
+    }
+
     /**
      * Hide close icon if duration is already set
      *
@@ -294,6 +328,7 @@ public class Banner {
         try{
             popupWindow.dismiss();
             showBanner = false;
+            asDropDown = false;
         }catch (Exception e){
             Log.e(TAG,e.toString());
         }
@@ -319,7 +354,11 @@ public class Banner {
 
         rootView.post(new Runnable() {
             public void run() {
+                if(asDropDown){
+                    popupWindow.showAsDropDown(rootView);
+                }else{
                     popupWindow.showAtLocation(rootView, gravity, 0, 0);
+                }
             }
         });
 
