@@ -355,7 +355,7 @@ public class Banner {
         rootView.post(new Runnable() {
             public void run() {
                 if(asDropDown){
-                    popupWindow.showAsDropDown(rootView);
+                    popupWindow.showAsDropDown(rootView,0,0);
                 }else{
                     popupWindow.showAtLocation(rootView, gravity, 0, 0);
                 }
