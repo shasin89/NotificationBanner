@@ -17,6 +17,14 @@ https://medium.com/@shasindranpoonudurai/the-effortless-in-app-notification-bann
 
 ![demo](/art/demoAuto.gif)
 
+**Below a view (eg Toolbar):**
+
+![demo](/art/below_view.gif)
+
+**FullScreen:**
+
+![demo](/art/fullscreen.gif)
+
 [![](https://jitpack.io/v/shasin89/NotificationBanner.svg)](https://jitpack.io/#shasin89/NotificationBanner)
 
 
@@ -66,6 +74,16 @@ Banner.make(View view,Context context, int bannerType, String message, int posit
 **Option 3: With custom layout:**
 ```java
 Banner.make(View view,Context context, int position, int Customlayout);
+```
+
+**Option 4: With custom layout and below a view (eg toolbar):**
+```java
+Banner make(View view,Context context, int position, int Customlayout,boolean asDropDown) 
+```
+
+**Option 5: With custom layout and full screen:**
+```java
+Banner make(View view,Context context, int Customlayout,boolean fillScreen)
 ```
 
 **Example:**
