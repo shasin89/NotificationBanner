@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         buttonBelowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(topBar,getBaseContext(),Banner.TOP,R.layout.banner,true).show();
+                callBannerBelow();
             }
         });
 
@@ -177,6 +177,17 @@ public class MainActivity extends AppCompatActivity {
         bannerClickListener();
         Banner.getInstance().setDuration(2000);
         Banner.getInstance().setCustomAnimationStyle(R.style.NotificationAnimationTop);
+        Banner.getInstance().show();
+    }
+
+    //example to invoke notification banner
+    private void callBannerBelow(){
+        Banner.make(topBar,getBaseContext(),Banner.TOP,R.layout.banner,true);
+        textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
+        relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
+        textView.setText("This is text for the banner");
+        bannerClickListener();
+        Banner.getInstance().setDuration(2000);
         Banner.getInstance().show();
     }
 

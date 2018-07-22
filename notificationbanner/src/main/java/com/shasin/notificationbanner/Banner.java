@@ -26,6 +26,7 @@ public class Banner {
     private View rootView;
     private  boolean focusable;
     private  boolean asDropDown;
+    private  boolean fillScreen;
     private PopupWindow popupWindow;
 
     public static int TOP = Gravity.TOP;
@@ -157,6 +158,24 @@ public class Banner {
         instance.setDuration(0);
         instance.setGravity(position);
         instance.asDropDown = asDropDown;
+
+        return instance;
+    }
+
+    public static Banner make(View view,Context context, int Customlayout,boolean fillScreen) {
+
+        if(instance == null){
+            instance = new Banner();
+        }else {
+            if(instance.showBanner){
+                instance.dismissBanner();
+            }
+        }
+        instance.rootView = view;
+        instance.mContext = context;
+        instance.setLayout(Customlayout);
+        instance.setDuration(0);
+        instance.fillScreen = fillScreen;
 
         return instance;
     }
@@ -343,8 +362,12 @@ public class Banner {
 
         showBanner = true;
 
-        final int width = LinearLayout.LayoutParams.MATCH_PARENT;
-        final int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int width = LinearLayout.LayoutParams.MATCH_PARENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+
+        if(fillScreen){
+            height = LinearLayout.LayoutParams.MATCH_PARENT;
+        }
 
         popupWindow = new PopupWindow(popupView, width, height, focusable);
 
