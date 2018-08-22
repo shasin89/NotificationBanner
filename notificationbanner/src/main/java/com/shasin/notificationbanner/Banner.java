@@ -88,6 +88,8 @@ public class Banner {
             instance.setGravity(position);
             instance.setCancelButton();
             instance.setAnimationstyle();
+            instance.fillScreen = false;
+            instance.asDropDown = false;
 
         return instance;
     }
@@ -113,7 +115,8 @@ public class Banner {
         instance.setGravity(position);
         instance.setCancelButton();
         instance.setAnimationstyle();
-
+        instance.fillScreen = false;
+        instance.asDropDown = false;
         return instance;
     }
 
@@ -135,6 +138,8 @@ public class Banner {
         instance.setLayout(Customlayout);
         instance.setDuration(0);
         instance.setGravity(position);
+        instance.fillScreen = false;
+        instance.asDropDown = false;
 
         return instance;
     }
@@ -158,6 +163,7 @@ public class Banner {
         instance.setDuration(0);
         instance.setGravity(position);
         instance.asDropDown = asDropDown;
+        instance.fillScreen = false;
 
         return instance;
     }
@@ -176,6 +182,7 @@ public class Banner {
         instance.setLayout(Customlayout);
         instance.setDuration(0);
         instance.fillScreen = fillScreen;
+        instance.asDropDown = false;
 
         return instance;
     }
@@ -303,6 +310,14 @@ public class Banner {
 
     public boolean isAsDropDown() {
         return asDropDown;
+    }
+
+    public void setFillScreen(boolean fillScreen) {
+        this.fillScreen = fillScreen;
+    }
+
+    public boolean isFillScreen() {
+        return fillScreen;
     }
 
     /**

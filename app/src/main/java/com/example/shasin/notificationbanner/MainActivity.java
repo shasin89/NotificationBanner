@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         buttonCustomAuto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                callBannerAuto();
+                callBannerFullScreen();
             }
         });
 
@@ -183,6 +183,17 @@ public class MainActivity extends AppCompatActivity {
     //example to invoke notification banner
     private void callBannerBelow(){
         Banner.make(topBar,getBaseContext(),Banner.TOP,R.layout.banner,true);
+        textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
+        relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
+        textView.setText("This is text for the banner");
+        bannerClickListener();
+        Banner.getInstance().setDuration(2000);
+        Banner.getInstance().show();
+    }
+
+    //example to invoke notification banner
+    private void callBannerFullScreen(){
+        Banner.make(topBar,getBaseContext(),R.layout.banner_full,true);
         textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
         relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
         textView.setText("This is text for the banner");
