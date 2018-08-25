@@ -382,7 +382,7 @@ public class Banner {
     public void show(){
 
         if(activity!=null){
-            if(activity.hasWindowFocus()){  //this will prevent activity not running crash due to async call
+//            if(activity.hasWindowFocus()){  //this will prevent activity not running crash due to async call
                 showBanner = true;
 
                 int width = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -409,7 +409,7 @@ public class Banner {
                 });
 
                 autoDismiss(duration);
-            }
+//            }
         }
     }
 
