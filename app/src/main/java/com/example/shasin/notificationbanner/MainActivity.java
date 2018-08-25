@@ -1,5 +1,6 @@
 package com.example.shasin.notificationbanner;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     RelativeLayout relativeLayout;
     View rootview;
+    Activity activity;
     LinearLayout topBar;
     Button buttonSuccess,buttonInfo,buttonWarning,buttonError,buttonCustom;
     Button buttonSuccessBottom,buttonInfoBottom,buttonWarningBottom,buttonErrorBottom,buttonCustomBottom;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        activity = this;
 
         rootview = findViewById(android.R.id.content);
         topBar = findViewById(R.id.topbarview);
@@ -55,28 +59,28 @@ public class MainActivity extends AppCompatActivity {
         buttonSuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.SUCCESS,"This is a successful message",Banner.TOP).show();
+                Banner.make(rootview, activity,Banner.SUCCESS,"This is a successful message",Banner.TOP).show();
             }
         });
 
         buttonInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.INFO,"This is an info message",Banner.TOP).show();
+                Banner.make(rootview,activity,Banner.INFO,"This is an info message",Banner.TOP).show();
             }
         });
 
         buttonWarning.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.WARNING,"This is a warning message",Banner.TOP).show();
+                Banner.make(rootview,activity,Banner.WARNING,"This is a warning message",Banner.TOP).show();
             }
         });
 
         buttonError.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.ERROR,"This is an error message",Banner.TOP).show();
+                Banner.make(rootview,activity,Banner.ERROR,"This is an error message",Banner.TOP).show();
             }
         });
 
@@ -90,28 +94,28 @@ public class MainActivity extends AppCompatActivity {
         buttonSuccessBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.SUCCESS,"This is a successful message",Banner.BOTTOM).show();
+                Banner.make(rootview,activity,Banner.SUCCESS,"This is a successful message",Banner.BOTTOM).show();
             }
         });
 
         buttonInfoBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.INFO,"This is an info message",Banner.BOTTOM).show();
+                Banner.make(rootview,activity,Banner.INFO,"This is an info message",Banner.BOTTOM).show();
             }
         });
 
         buttonWarningBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.WARNING,"This is a warning message",Banner.BOTTOM).show();
+                Banner.make(rootview,activity,Banner.WARNING,"This is a warning message",Banner.BOTTOM).show();
             }
         });
 
         buttonErrorBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.ERROR,"This is an error message",Banner.BOTTOM).show();
+                Banner.make(rootview,activity,Banner.ERROR,"This is an error message",Banner.BOTTOM).show();
             }
         });
 
@@ -125,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         buttonErrorAuto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Banner.make(rootview,getBaseContext(),Banner.ERROR,"This is an error message",Banner.BOTTOM,2000).show();
+                Banner.make(rootview,activity,Banner.ERROR,"This is an error message",Banner.BOTTOM,2000).show();
             }
         });
 
@@ -147,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 
     //example to invoke notification banner
     private void callBannerTop(){
-        Banner.make(rootview,getBaseContext(),Banner.TOP,R.layout.banner);
+        Banner.make(rootview,activity,Banner.TOP,R.layout.banner);
         textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
         relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
         textView.setText("This is text for the banner");
@@ -159,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
     //example to invoke notification banner
     private void callBannerBottom(){
-        Banner.make(rootview,getBaseContext(),Banner.BOTTOM,R.layout.banner);
+        Banner.make(rootview,activity,Banner.BOTTOM,R.layout.banner);
         textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
         relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
         textView.setText("This is text for the banner");
@@ -170,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
     //example to invoke notification banner
     private void callBannerAuto(){
-        Banner.make(rootview,getBaseContext(),Banner.TOP,R.layout.banner);
+        Banner.make(rootview,activity,Banner.TOP,R.layout.banner);
         textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
         relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
         textView.setText("This is text for the banner");
@@ -182,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
     //example to invoke notification banner
     private void callBannerBelow(){
-        Banner.make(topBar,getBaseContext(),Banner.TOP,R.layout.banner,true);
+        Banner.make(topBar,activity,Banner.TOP,R.layout.banner,true);
         textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
         relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
         textView.setText("This is text for the banner");
@@ -193,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
 
     //example to invoke notification banner
     private void callBannerFullScreen(){
-        Banner.make(topBar,getBaseContext(),R.layout.banner_full,true);
+        Banner.make(topBar,activity,R.layout.banner_full,true);
         textView = Banner.getInstance().getBannerView().findViewById(R.id.status_text);
         relativeLayout = Banner.getInstance().getBannerView().findViewById(R.id.rlCancel);
         textView.setText("This is text for the banner");

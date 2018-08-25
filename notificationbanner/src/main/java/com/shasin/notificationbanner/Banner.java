@@ -1,5 +1,7 @@
 package com.shasin.notificationbanner;
 
+import android.app.Activity;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
@@ -22,6 +24,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 public class Banner {
 
     private Context mContext;
+    private Activity activity;
     private View popupView;
     private View rootView;
     private  boolean focusable;
@@ -64,13 +67,13 @@ public class Banner {
 
     }
 
-    public  Banner(View view, final Context context) {
+    public  Banner(View view, final Activity activity) {
         // create the popup window
-        this.mContext = context;
+        this.activity = activity;
         this.rootView = view;
     }
 
-    public static Banner make(View view,Context context, int bannerType, String message, int position) {
+    public static Banner make(View view,Activity activity, int bannerType, String message, int position) {
 
         if(instance == null){
             instance = new Banner();
@@ -80,7 +83,8 @@ public class Banner {
             }
         }
             instance.rootView = view;
-            instance.mContext = context;
+//            instance.mContext = context;
+            instance.activity = activity;
             instance.setBannerLayout(bannerType);
             instance.setLayout(instance.layout);
             instance.setBannerText(message);
@@ -98,7 +102,7 @@ public class Banner {
      * This constructor is used for autodismiss
      *
      */
-    public static Banner make(View view,Context context, int bannerType, String message, int position, int duration) {
+    public static Banner make(View view,Activity activity, int bannerType, String message, int position, int duration) {
         if(instance == null){
             instance = new Banner();
         }else {
@@ -107,7 +111,7 @@ public class Banner {
             }
         }
         instance.rootView = view;
-        instance.mContext = context;
+        instance.activity = activity;
         instance.setBannerLayout(bannerType);
         instance.setLayout(instance.layout);
         instance.setBannerText(message);
@@ -124,7 +128,7 @@ public class Banner {
      * this constructor is used for customlayout
      *
      */
-    public static Banner make(View view,Context context, int position, int Customlayout) {
+    public static Banner make(View view,Activity activity, int position, int Customlayout) {
 
         if(instance == null){
             instance = new Banner();
@@ -134,7 +138,7 @@ public class Banner {
             }
         }
         instance.rootView = view;
-        instance.mContext = context;
+        instance.activity = activity;
         instance.setLayout(Customlayout);
         instance.setDuration(0);
         instance.setGravity(position);
@@ -148,7 +152,7 @@ public class Banner {
      * this constructor is used for customlayout and show notification as dropdown of a view
      *
      */
-    public static Banner make(View view,Context context, int position, int Customlayout,boolean asDropDown) {
+    public static Banner make(View view,Activity activity, int position, int Customlayout,boolean asDropDown) {
 
         if(instance == null){
             instance = new Banner();
@@ -158,7 +162,7 @@ public class Banner {
             }
         }
         instance.rootView = view;
-        instance.mContext = context;
+        instance.activity = activity;
         instance.setLayout(Customlayout);
         instance.setDuration(0);
         instance.setGravity(position);
@@ -168,7 +172,7 @@ public class Banner {
         return instance;
     }
 
-    public static Banner make(View view,Context context, int Customlayout,boolean fillScreen) {
+    public static Banner make(View view,Activity activity, int Customlayout,boolean fillScreen) {
 
         if(instance == null){
             instance = new Banner();
@@ -178,7 +182,7 @@ public class Banner {
             }
         }
         instance.rootView = view;
-        instance.mContext = context;
+        instance.activity = activity;
         instance.setLayout(Customlayout);
         instance.setDuration(0);
         instance.fillScreen = fillScreen;
@@ -344,10 +348,12 @@ public class Banner {
      *
      */
     public void setLayout(int layout){
-        LayoutInflater inflater = (LayoutInflater)
-                mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-        popupView = inflater.inflate(layout, null);
-        rlCancel = popupView.findViewById(R.id.rlCancel);
+        if(activity != null){
+            LayoutInflater inflater = (LayoutInflater)
+                    activity.getBaseContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+            popupView = inflater.inflate(layout, null);
+            rlCancel = popupView.findViewById(R.id.rlCancel);
+        }
     }
 
     /**
@@ -375,32 +381,36 @@ public class Banner {
      */
     public void show(){
 
-        showBanner = true;
+        if(activity!=null){
+            if(activity.hasWindowFocus()){  //this will prevent activity not running crash due to async call
+                showBanner = true;
 
-        int width = LinearLayout.LayoutParams.MATCH_PARENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+                int width = LinearLayout.LayoutParams.MATCH_PARENT;
+                int height = LinearLayout.LayoutParams.WRAP_CONTENT;
 
-        if(fillScreen){
-            height = LinearLayout.LayoutParams.MATCH_PARENT;
-        }
-
-        popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-        if(animationStyle != null){
-            popupWindow.setAnimationStyle(animationStyle);
-        }
-
-        rootView.post(new Runnable() {
-            public void run() {
-                if(asDropDown){
-                    popupWindow.showAsDropDown(rootView,0,0);
-                }else{
-                    popupWindow.showAtLocation(rootView, gravity, 0, 0);
+                if(fillScreen){
+                    height = LinearLayout.LayoutParams.MATCH_PARENT;
                 }
-            }
-        });
 
-        autoDismiss(duration);
+                popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                if(animationStyle != null){
+                    popupWindow.setAnimationStyle(animationStyle);
+                }
+
+                rootView.post(new Runnable() {
+                    public void run() {
+                        if(asDropDown){
+                            popupWindow.showAsDropDown(rootView,0,0);
+                        }else{
+                            popupWindow.showAtLocation(rootView, gravity, 0, 0);
+                        }
+                    }
+                });
+
+                autoDismiss(duration);
+            }
+        }
     }
 
     private void setAnimationstyle(){
